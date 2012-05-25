@@ -17,7 +17,7 @@ ifneq "" "$(filter eng.%,$(BUILD_NUMBER))"
   # it will change every time.  Pick a stable value.
   FILE_NAME_TAG := eng.$(USER)
 else
-  FILE_NAME_TAG := $(BUILD_NUMBER)
+  FILE_NAME_TAG := $(TARGET_BUILD_VARIANT).$(USER)
 endif
 
 # -----------------------------------------------------------------
@@ -1296,11 +1296,7 @@ INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
 
-ifdef CYANOGEN_WITH_GOOGLE
-$(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
-else
 $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
-endif
 
 ifeq ($(TARGET_OTA_ASSERT_DEVICE),)
 $(INTERNAL_OTA_PACKAGE_TARGET): override_device := auto
@@ -1376,7 +1372,7 @@ bacon: otapackage
 ifeq ($(TARGET_CUSTOM_RELEASETOOL),)
 	$(hide) \
 	WANT_SQUASHFS=$(WANT_SQUASHFS) \
-	./vendor/cyanogen/tools/squisher
+	./vendor/lewa/tools/squisher
 else
 	$(hide) \
 	WANT_SQUASHFS=$(WANT_SQUASHFS) \

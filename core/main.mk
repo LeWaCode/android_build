@@ -191,9 +191,10 @@ endif
 
 user_variant := $(filter userdebug user,$(TARGET_BUILD_VARIANT))
 enable_target_debugging := true
+
 ifneq (,$(user_variant))
   # Target is secure in user builds.
-  ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=1
+  ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
   tags_to_install := user
   ifeq ($(user_variant),userdebug)
@@ -204,7 +205,7 @@ ifneq (,$(user_variant))
     ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.lockprof.threshold=500
   else
     # Disable debugging in plain user builds.
-    enable_target_debugging :=
+    # enable_target_debugging :=
   endif
 
   # TODO: Remove this and the corresponding block in
@@ -217,7 +218,7 @@ ifneq (,$(user_variant))
   endif
 
   # Disallow mock locations by default for user builds
-  ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=0
+  ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
 
 else # !user_variant
   # Turn on checkjni for non-user builds.

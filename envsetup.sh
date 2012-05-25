@@ -59,12 +59,12 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^cyanogen_") ; then
-       CM_BUILD=$(echo -n $1 | sed -e 's/^cyanogen_//g')
+    if (echo -n $1 | grep -q -e "^lewa_") ; then
+       LEWA_BUILD=$(echo -n $1 | sed -e 's/^lewa_//g')
     else
-       CM_BUILD=
+       LEWA_BUILD=
     fi
-    export CM_BUILD
+    export LEWA_BUILD
 
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
         TARGET_PRODUCT=$1 TARGET_BUILD_VARIANT= \
@@ -502,7 +502,7 @@ function breakfast()
     CM_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/cyanogen/vendorsetup.sh vendor/cyanogen/build/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/lewa/vendorsetup.sh vendor/lewa/build/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -519,7 +519,7 @@ function breakfast()
             lunch $target
         else
             # This is probably just the CM model name
-            lunch cyanogen_$target-eng
+            lunch lewa_$target-eng
         fi
     fi
     return $?
@@ -654,8 +654,8 @@ function tapas()
 function eat()
 {
     if [ "$OUT" ] ; then
-        MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $OUT/system/build.prop`
-        ZIPFILE=update-cm-$MODVERSION-signed.zip
+        MODVERSION=`sed -n -e'/ro\.modversion/s/^//p' $OUT/system/build.prop`
+        ZIPFILE=$MODVERSION-ROM.zip
         ZIPPATH=$OUT/$ZIPFILE
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"

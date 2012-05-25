@@ -53,24 +53,26 @@ PRODUCT_PACKAGES := \
     libz \
     sqlite-jdbc \
     Browser \
-    Contacts \
-    Home \
     HTMLViewer \
-    Phone \
     ApplicationsProvider \
-    ContactsProvider \
-    DownloadProvider \
-    DownloadProviderUi \
-    MediaProvider \
     PicoTts \
-    SettingsProvider \
-    TelephonyProvider \
     TtsService \
     VpnServices \
     UserDictionaryProvider \
-    PackageInstaller \
     DefaultContainerService \
     Bugreport
+
+# removed by lewa
+#    Home \
+#    Contacts \ 
+#    PackageInstaller \
+#    Phone \
+#    ContactsProvider \
+#    DownloadProvider \
+#    DownloadProviderUi \
+#    MediaProvider \
+#    SettingsProvider \
+#    TelephonyProvider \
 
 # host-only dependencies
 ifeq ($(WITH_HOST_DALVIK),true)

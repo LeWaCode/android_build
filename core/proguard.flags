@@ -10,8 +10,8 @@
 -dontoptimize
 -dontpreverify
 
-# Don't obfuscate. We only need dead code striping.
--dontobfuscate
+# Don't obfuscate. We only need dead code striping.,by lewa
+#-dontobfuscate
 
 # Add this flag in your package's own configuration if it's needed.
 #-flattenpackagehierarchy

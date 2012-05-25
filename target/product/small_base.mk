@@ -18,8 +18,9 @@
 # Open-Source part of the tree. This is a base configuration to
 # bes used for AOSP builds on various target devices.
 
-PRODUCT_PACKAGES := \
-    VoiceDialer
+# removed by lewa,ioz9
+#PRODUCT_PACKAGES := \
+#    VoiceDialer
 
 # Additional settings used in all AOSP builds
 PRODUCT_PROPERTY_OVERRIDES := \
