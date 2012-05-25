@@ -17,6 +17,25 @@
 # This is a generic product that isn't specialized for a specific device.
 # It includes the base Android platform.
 
+# remove by lewa,ioz9
+ifeq (1,1)
+PRODUCT_PACKAGES := \
+    AlarmProvider \
+    Bluetooth \
+    Calculator \
+    Camera \
+    CertInstaller \
+    DrmProvider \
+    Email \
+    LatinIME \
+    Provision \
+    QuickSearchBox \
+    Superuser \
+    Sync \
+    Updater \
+    SyncProvider \
+    CalendarProvider
+else
 PRODUCT_PACKAGES := \
     AccountAndSyncSettings \
     DeskClock \
@@ -28,6 +47,7 @@ PRODUCT_PACKAGES := \
     CertInstaller \
     DrmProvider \
     Email \
+    Gallery \
     Gallery3D \
     LatinIME \
     Launcher2 \
@@ -43,6 +63,7 @@ PRODUCT_PACKAGES := \
     Updater \
     CalendarProvider \
     SyncProvider
+endif
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core.mk)
 

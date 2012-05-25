@@ -18,6 +18,8 @@
 # Open-Source part of the tree. This is a base configuration to
 # bes used for AOSP builds on various target devices.
 
+# removed by lewa,ioz9
+ifeq (1,0)
 PRODUCT_PACKAGES := \
     OpenWnn \
     PinyinIME \
@@ -25,6 +27,7 @@ PRODUCT_PACKAGES := \
     libWnnEngDic \
     libWnnJpnDic \
     libwnndict
+endif
 
 # Additional settings used in all AOSP builds
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -33,9 +36,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Put en_US first in the list, to make it default.
 PRODUCT_LOCALES := en_US
 
+# removed by ioz9 for lewaAudio
 # Pick up some sounds - stick with the short list to save space
 # on smaller devices.
-$(call inherit-product-if-exists, frameworks/base/data/sounds/OriginalAudio.mk)
+#$(call inherit-product-if-exists, frameworks/base/data/sounds/OriginalAudio.mk)
 
 # Get the TTS language packs
 $(call inherit-product-if-exists, external/svox/pico/lang/all_pico_languages.mk)

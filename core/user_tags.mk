@@ -478,3 +478,15 @@ GRANDFATHERED_USER_MODULES += \
 	yuv420sp2rgb \
 	zipalign
 
+# added by lewa
+GRANDFATHERED_USER_MODULES += \
+	avinfo \
+	hcitool \
+	hciconfig \
+	hcidump \
+	bccmd \
+	rfcomm \
+	l2ping \
+	liblame \
+	libga \
+	sysd
