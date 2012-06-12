@@ -487,6 +487,4 @@ GRANDFATHERED_USER_MODULES += \
 	bccmd \
 	rfcomm \
 	l2ping \
-	liblame \
-	libga \
-	sysd
+	liblame
