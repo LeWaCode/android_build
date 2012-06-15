@@ -275,3 +275,9 @@ endif
 ifeq ($(PRINT_BUILD_CONFIG),)
 PRINT_BUILD_CONFIG := true
 endif
+
+ifneq ($(LEWA_CUSTOM_ROM),)
+TARGET_LEWA_ROM := $(LEWA_CUSTOM_ROM)
+else
+TARGET_LEWA_ROM := LeWa
+endif
