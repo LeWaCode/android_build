@@ -30,6 +30,7 @@ PRODUCT_PACKAGES := \
     LatinIME \
     Provision \
     QuickSearchBox \
+    SoundRecorder \
     Superuser \
     Sync \
     Updater \
