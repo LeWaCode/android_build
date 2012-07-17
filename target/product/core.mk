@@ -47,6 +47,7 @@ PRODUCT_PACKAGES := \
     libicuuc \
     libjavacore \
     libnativehelper \
+    libcyanogen-dsp \
     libnfc_ndef \
     libsqlite_jni \
     libssl \
