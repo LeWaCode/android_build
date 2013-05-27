@@ -307,3 +307,19 @@ class EdifyGenerator(object):
       data = open(os.path.join(input_path, "updater")).read()
     common.ZipWriteStr(output_zip, "META-INF/com/google/android/update-binary",
                        data, perms=0755)
+
+  def AddToZipForPatch(self, input_zip, output_zip, input_path=None):
+    """Write the accumulated script to the output_zip file.  input_zip
+    is used as the source for the 'updater' binary needed to run
+    script.  If input_path is not None, it will be used as a local
+    path for the binary instead of input_zip. by george,2011-11-11"""
+
+    self.UnmountAll()
+
+    common.ZipWriteStr(output_zip, "META-INF/com/google/android/updater-script",
+                       "\n".join(self.script) + "\n")
+
+    data = input_zip.read("META-INF/com/google/android/update-binary")
+    common.ZipWriteStr(output_zip, "META-INF/com/google/android/update-binary",
+                       data, perms=0755)
+

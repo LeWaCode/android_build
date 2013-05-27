@@ -1160,6 +1160,13 @@ ifeq ($(BOARD_USES_UBOOT_MULTIIMAGE),true)
 
 endif
 
+SIGN_TARGET_FILES_APKS_SCRIPT := ./build/tools/releasetools/sign_target_files_apks
+ifeq ($(LEWA_CUSTOM_DEVICE),)
+TARGET_DEVICE_LEWA = $(shell echo $(TARGET_DEVICE)|sed 's/^\w\|\s\w/\U&/g')
+else
+TARGET_DEVICE_LEWA = $(LEWA_CUSTOM_DEVICE)
+endif
+LEWA_OTA_PACKAGE = $(PRODUCT_OUT)/OTA_LeWa_ROM_$(TARGET_DEVICE_LEWA)_$(shell date +%y.%m.%d.%H).zip
 
 # Depending on the various images guarantees that the underlying
 # directories are up-to-date.
@@ -1274,6 +1281,8 @@ endif
 	$(hide) zipinfo -1 $@ | awk -F/ 'BEGIN { OFS="/" } /^SYSTEM\// {$$1 = "system"; print}' | $(HOST_OUT_EXECUTABLES)/fs_config > $(zip_root)/META/filesystem_config.txt
 	$(hide) (cd $(zip_root) && zip -q ../$(notdir $@) META/filesystem_config.txt)
 
+	@# $(hide) $(SIGN_TARGET_FILES_APKS_SCRIPT) $@ $(LEWA_OTA_PACKAGE)
+	$(hide) cp -fr $@ $(LEWA_OTA_PACKAGE)
 
 target-files-package: $(BUILT_TARGET_FILES_PACKAGE)
 
@@ -1311,6 +1320,9 @@ else
     OTA_FROM_TARGET_SCRIPT := $(TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT)
 endif
 
+
+LEWA_OTA_FULL_PACKAGE = $(PRODUCT_OUT)/FULL_LeWa_ROM_$(TARGET_DEVICE_LEWA)_$(shell date +%y.%m.%d.%H).zip
+
 $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTATOOLS)
 	@echo -e ${CL_PFX}"Package OTA:"${CL_RST}" $@"
 	$(OTA_FROM_TARGET_SCRIPT) -v \
@@ -1319,10 +1331,25 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTATOOLS)
            --backup=$(backuptool) \
 	   --override_device=$(override_device) \
            $(BUILT_TARGET_FILES_PACKAGE) $@
+	$(hide) cp -fr $@ $(LEWA_OTA_FULL_PACKAGE)
 
 .PHONY: otapackage
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
+
+lewa_debug:
+	@echo WITH_DEXPREOPT_buildbot=$(WITH_DEXPREOPT_buildbot)
+	@echo WITH_DEXPREOPT=$(WITH_DEXPREOPT)
+	@echo $(HOST_OS)-$(WITH_DEXPREOPT_buildbot)
+	@echo TARGET_BUILD_VARIANT=$(TARGET_BUILD_VARIANT)
+	@echo PRODUCT_COPY_FILES=$(PRODUCT_COPY_FILES)
+	@echo enable_target_debugging=$(enable_target_debugging)
+	@echo $(TARGET_DEVICE_LEWA)
+
+lewa_clean:
+	@echo cleaning the packages:FULL_LeWa_ROM_*.zip,OTA_LeWa_ROM_*.zip
+	@rm -fr $(PRODUCT_OUT)/FULL_LeWa_ROM_*.zip
+	@rm -fr $(PRODUCT_OUT)/OTA_LeWa_ROM_*.zip
 
 # -----------------------------------------------------------------
 # The update package

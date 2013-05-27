@@ -47,33 +47,57 @@ PRODUCT_PACKAGES := \
     libicuuc \
     libjavacore \
     libnativehelper \
-    libcyanogen-dsp \
     libnfc_ndef \
     libsqlite_jni \
     libssl \
     libz \
     sqlite-jdbc \
-    Browser \
     HTMLViewer \
+    Phone \
     ApplicationsProvider \
+    ContactsProvider \
+    DownloadProvider \
+    DownloadProviderUi \
+    MediaProvider \
     PicoTts \
+    SettingsProvider \
+    TelephonyProvider \
     TtsService \
     VpnServices \
     UserDictionaryProvider \
-    DefaultContainerService \
-    Bugreport
+    PackageInstaller \
+    DefaultContainerService
 
 # removed by lewa
-#    Home \
-#    Contacts \ 
-#    PackageInstaller \
-#    Phone \
-#    ContactsProvider \
-#    DownloadProvider \
-#    DownloadProviderUi \
-#    MediaProvider \
-#    SettingsProvider \
-#    TelephonyProvider \
+# Home
+# Contacts 
+
+# added by lewa
+PRODUCT_PACKAGES += \
+    Bugreport \
+    PIM \
+    LocationProvider \
+    LewaUpdater \
+    LewaPlayer \
+    LabiSync \
+    LewaPond \
+    LewaFileManager \
+    Intercept \
+    InterceptProvider \
+    LewaFace \
+    Cit
+
+# add by lewa for defy and defy_plus
+ifneq ($(TARGET_DEVICE),jordan)
+ifneq ($(TARGET_DEVICE),jordan_plus)
+    PRODUCT_PACKAGES += \
+        Swapper
+endif
+endif
+
+#    Power+ \
+
+#    SPM \
 
 # host-only dependencies
 ifeq ($(WITH_HOST_DALVIK),true)

@@ -20,6 +20,8 @@
 # remove by lewa,ioz9
 ifeq (1,1)
 PRODUCT_PACKAGES := \
+    AccountAndSyncSettings \
+    DeskClock \
     AlarmProvider \
     Bluetooth \
     Calculator \
@@ -30,12 +32,14 @@ PRODUCT_PACKAGES := \
     LatinIME \
     Provision \
     QuickSearchBox \
-    SoundRecorder \
+    Settings \
     Superuser \
     Sync \
+    SystemUI \
     Updater \
     SyncProvider \
-    CalendarProvider
+    CalendarProvider \
+    LewaLauncher
 else
 PRODUCT_PACKAGES := \
     AccountAndSyncSettings \

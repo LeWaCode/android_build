@@ -84,6 +84,10 @@ endef
 # it will be treated as a goal, and the eng variant will be used.
 INTERNAL_VALID_VARIANTS := user userdebug eng tests
 
+ifeq ($(TARGET_BUILD_VARIANT),user)
+    WITH_DEXPREOPT_buildbot := true
+endif
+
 # ---------------------------------------------------------------
 # Provide "PRODUCT-<prodname>-<goal>" targets, which lets you build
 # a particular configuration without needing to set up the environment.
